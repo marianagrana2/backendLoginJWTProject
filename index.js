@@ -1,3 +1,6 @@
 require('dotenv').config();
-const PORT = process.env.PORT;
-console.log("Port:", PORT)
+const Server = require('./server');
+
+const server = new Server();
+
+server.listen()
