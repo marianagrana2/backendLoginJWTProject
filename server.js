@@ -7,8 +7,10 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || 3003;
         this.database = new Database();
+        this.usersPath = "/api/v1/users"
         this.dbConnection();
         this.middlewares();
+        this.router();
     }
 
     middlewares(){
@@ -19,6 +21,9 @@ class Server {
 
     async dbConnection(){
         await this.database.dbConnection();
+    }
+    router(){
+        this.app.use(this.usersPath,require("./routes/users.routes"));
     }
 
     listen(){
