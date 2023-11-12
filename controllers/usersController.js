@@ -35,7 +35,8 @@ const readUser = async(req, res) =>{
         })
     }catch(error){
         res.status(500).json({
-            msg:"Algo Ocurrió al leer los usuarios."
+            msg:"Algo Ocurrió al leer los usuarios.",
+            error
         })
     }
 }

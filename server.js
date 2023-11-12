@@ -8,6 +8,7 @@ class Server {
         this.port = process.env.PORT || 3003;
         this.database = new Database();
         this.usersPath = "/api/v1/users"
+        this.productsPath = "/api/v1/products"
         this.dbConnection();
         this.middlewares();
         this.router();
@@ -24,6 +25,7 @@ class Server {
     }
     router(){
         this.app.use(this.usersPath,require("./routes/users.routes"));
+        this.app.use(this.productsPath,require("./routes/products.routes"));
     }
 
     listen(){
