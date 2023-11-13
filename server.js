@@ -1,6 +1,7 @@
 const express = require('express');
 const Database = require('./database/config');
 const cors = require('cors'); 
+const {errors} = require("celebrate")
 
 class Server {
     constructor(){
@@ -24,7 +25,7 @@ class Server {
         await this.database.dbConnection();
     }
     router(){
-        this.app.use(this.usersPath,require("./routes/users.routes"));
+        this.app.use(this.usersPath,require("./routes/users.routes"), errors());
         this.app.use(this.productsPath,require("./routes/products.routes"));
     }
 
