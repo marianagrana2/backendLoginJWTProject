@@ -10,6 +10,7 @@ class Server {
         this.database = new Database();
         this.usersPath = "/api/v1/users"
         this.productsPath = "/api/v1/products"
+        this.ordersPath = "/api/v1/orders"
         this.dbConnection();
         this.middlewares();
         this.router();
@@ -27,6 +28,7 @@ class Server {
     router(){
         this.app.use(this.usersPath,require("./routes/users.routes"), errors());
         this.app.use(this.productsPath,require("./routes/products.routes"));
+        this.app.use(this.ordersPath, require("./routes/orders.routes"));
     }
 
     listen(){

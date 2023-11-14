@@ -29,7 +29,7 @@ const createUser = async(req = request, res = response) =>{
 const readUser = async(req, res) =>{
     try{
         const queryParam = {active:true};
-        const user = await User.find(queryParam);
+        const user = await User.find(queryParam).populate("orders");
         res.status(200).json({
             user
         })

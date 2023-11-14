@@ -18,9 +18,11 @@ const UserSchema = Schema ({
         type:String,
         required: [true, "El password es requerido"]
     },
-    // sales:{
-        //type:String,
-    //}
+    orders:{
+        type:Schema.Types.ObjectId,
+        ref: "Order",
+        default:null
+    },
     userType:{
         type:String,
     },
@@ -29,8 +31,6 @@ const UserSchema = Schema ({
         default:true
     }
     
-
-
 })
 
 module.exports = model('User', UserSchema)
