@@ -22,7 +22,7 @@ const createOrder = async (req, res) =>{
 const readOrder = async(req, res) =>{
     try{
         const queryParam = {active:true};
-        const order = await Order.find(queryParam);
+        const order = await Order.find(queryParam).populate(["orderUser","products"])
         res.status(200).json({
             order
         })

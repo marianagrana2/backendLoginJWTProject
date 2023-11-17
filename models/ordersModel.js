@@ -1,13 +1,14 @@
 const {Schema, model } = require('mongoose');
 
 const OrderSchema = new Schema({
-   userId:{
+   orderUser:{
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
    },
-   // productId:{
-        
-   // }
+   products:[{
+        type: Schema.Types.ObjectId,
+        ref:"Product",
+   }],
    totalNoProducts:{
     type:Number
    },
@@ -22,12 +23,5 @@ const OrderSchema = new Schema({
     default:true
    }
 })
-//REVISAR ESTO DE ABAJO
-OrderSchema.pre('save', async function(next){
-    if(!this.userId){
-        const defaultUser = await Order.findOne({userName:"Test"})
-        this.userId = defaultUser._id
-    }
-    next();
-})
+
 module.exports = model("Order", OrderSchema)
