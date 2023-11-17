@@ -28,7 +28,7 @@ class Server {
     }
     router(){
         this.app.use(this.usersPath,require("./routes/users.routes"), errors());
-        this.app.use(this.productsPath,require("./routes/products.routes"));
+        this.app.use(this.productsPath,require("./routes/products.routes"), errors());
         this.app.use(this.ordersPath, require("./routes/orders.routes"));
         this.app.use(this.registerPath, require("./routes/register.routes"));
     }
