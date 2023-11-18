@@ -1,6 +1,8 @@
 const {celebrate, Segments} = require("celebrate");
-const {schema} = require("../validators/userValidator");
+const {schema, schemaProducts} = require("../validators/userValidator");
+
 
 const celebrateValidator = celebrate({[Segments.BODY]:schema});
+const celebrateValidatorProducts = celebrate({[Segments.BODY]: schemaProducts});
 
-module.exports = {celebrateValidator}
+module.exports = {celebrateValidator,celebrateValidatorProducts}
