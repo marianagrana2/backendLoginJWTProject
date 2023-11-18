@@ -11,19 +11,31 @@ const validateJWT = async(req,res,next) => {
     try{
      const {id} = jwt.verify(token, process.env.JWT_SECRET)
      const user = await User.findById(id)
-
+     
      if(!user){
         return res.status(401).json({
             msg:"Token no valido - Usuario no existe en la base de datos"
         })
      }
-     req.user = user
-     next()
+
+     const isAdmin = user.userType === "admin"
+     
+     if(isAdmin){
+        req.user = user
+        next();
+         return
+     } else{
+         return res.status(403).json({
+             msg: "El usuario no es administrador."
+         })
+     }
+     
     } catch(error){
         return res.status(401).json({
             msg:"Token no valido"
         })
     }
+   
 }
 
 module.exports = {validateJWT}
