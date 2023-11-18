@@ -6,12 +6,12 @@ const {
     updateOrder,
     deleteOrder
 } = require("../controllers/ordersController");
-
+const {validateJWT} = require("../middlewares/jwtValidator")
 const router = Router()
 
-router.post("/",createOrder);
+router.post("/",validateJWT,createOrder);
 router.get("/",readOrder);
-router.put("/:orderId", updateOrder);
-router.delete("/orderId", deleteOrder);
+router.put("/:orderId", validateJWT,updateOrder);
+router.delete("/orderId",validateJWT, deleteOrder);
 
 module.exports = router 
