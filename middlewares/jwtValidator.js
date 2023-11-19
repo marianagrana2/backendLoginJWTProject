@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/usersModel");
+const {authCustomer} = require("../middlewares/authCustomerValidator")
 
 const validateJWT = async(req,res,next) => {
     const token = req.header("user-token")
@@ -25,9 +26,8 @@ const validateJWT = async(req,res,next) => {
         next();
         return
      } else{
-         return res.status(403).json({
-             msg: "El usuario no es administrador."
-         })
+         req.user = user;
+         authCustomer(req,res,next);
      }
      
     } catch(error){
