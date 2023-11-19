@@ -23,7 +23,7 @@ const validateJWT = async(req,res,next) => {
      if(isAdmin){
         req.user = user
         next();
-         return
+        return
      } else{
          return res.status(403).json({
              msg: "El usuario no es administrador."
@@ -31,6 +31,7 @@ const validateJWT = async(req,res,next) => {
      }
      
     } catch(error){
+        console.error(error)
         return res.status(401).json({
             msg:"Token no valido"
         })

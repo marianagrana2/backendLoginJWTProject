@@ -19,7 +19,7 @@ const schema = Joi.object().keys({
         "string.empty": "La contraseña no debe estar vacia.",
         "string.min": "La contraseña debe tener un mínimo de {#limit} caracteres."
     }),
-    orders: Joi.object(),
+    orders: Joi.array(),
     userType: Joi.string()
 })
 

@@ -1,18 +1,13 @@
 const {response, request} = require("express");
 const User = require("../models/usersModel");
-const bcrypt = require("bcryptjs");
 
 // Crear User (CRUD) - Create
 const createUser = async(req = request, res = response) =>{
     try{
         const {body} = req;
-        const {password} = body;
-        // Utilizar bcrypt para el hash del password 
-        const salt = await bcrypt.genSalt(10)
-        body.password = await bcrypt.hash(password,salt)
-
         const user = new User(body)
         await user.save()
+
         res.status(201).json({
         msg:"Usuario creado con éxito.",
         user
@@ -29,7 +24,7 @@ const createUser = async(req = request, res = response) =>{
 const readUser = async(req, res) =>{
     try{
         const queryParam = {active:true};
-        const user = await User.find(queryParam).populate("orders");
+        const user = await User.find(queryParam).populate("orders")
         res.status(200).json({
             user
         })

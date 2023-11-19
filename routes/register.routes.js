@@ -5,7 +5,7 @@ const {celebrateValidator} = require("../middlewares/celebrateValidator");
 const {validateJWT} = require("../middlewares/jwtValidator")
 
 const router = Router()
-router.post("/register",validateJWT,celebrateValidator , registerUser);
+router.post("/register",celebrateValidator , registerUser);
 router.post("/login", loginUser);
 
 module.exports = router

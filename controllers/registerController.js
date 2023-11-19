@@ -6,13 +6,13 @@ const jwt = require("jsonwebtoken");
 // Registro Usuario con Hash en la contrasenia
 const registerUser = async (req = request, res = response) =>{
     try{
-        const {userName, password, email } = req.body
+        const {userName, password, email, userType} = req.body
         const user = await User.findOne({userName})
 
         if(!user) {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hashSync(password, salt)
-            const user = new User({userName, email, password: hashedPassword})
+            const user = new User({userName, email, userType, password: hashedPassword})
             await user.save()
             
             res.status(201).json({

@@ -1,6 +1,7 @@
 const {Schema, model } = require("mongoose");
+
 // Schema de user (Elementos que va a tener el user)
-const UserSchema = Schema ({
+const UserSchema = new Schema ({
     userName:{
         type:String,
         required: [true, "El nombre de usuario es requerido."],
@@ -18,14 +19,13 @@ const UserSchema = Schema ({
         type:String,
         required: [true, "El password es requerido"]
     },
-    orders:{
-        type:Schema.Types.ObjectId,
-        ref: "Order",
-        default:null
-    },
     userType:{
         type:String,
     },
+    orders:[{
+        type: Schema.Types.ObjectId,
+        ref:"Order",
+    }],
     active:{
         type:Boolean,
         default:true
