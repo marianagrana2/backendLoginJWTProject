@@ -1,5 +1,6 @@
 const {response, request} = require("express");
 const User = require("../models/usersModel");
+const Order = require("../models/ordersModel")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -41,12 +42,17 @@ const loginUser = async (req = request, res = response) => {
             msg:"El usuario no fue encontrado."
         })
     }
+    // Muestra sus orders a los usuarios tipo customer 
+    const orders = user.userType === "customer" ? await Order.find({orderUser: user._id}) : [];
+
     const correctPassword = bcrypt.compareSync(password, user.password)
 
     if(correctPassword){
         const token = jwt.sign({id: user._id, userName: user.userName},process.env.JWT_SECRET)
         res.status(200).json({
-            token
+            msg:"¡Bienvenido(a)!",
+            token,
+            orders
         })
     } else{
         res.status(403).json({
