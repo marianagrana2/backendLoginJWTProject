@@ -13,7 +13,3 @@ Los usuarios tiene su propio JWT Token con el que se valida su acceso y su contr
  - Express
  - Node 
  - MongoDB
-
- #### Ruta para probar
- Si deseas probar el proyecto sin registrarte puedes ingresar a [cyclic](https://backendadvecommerceproject.cyclic.app/) y después en la url agregar **/api/v1/products** y te mostrará los productos disponibles en la base de datos. 
-
